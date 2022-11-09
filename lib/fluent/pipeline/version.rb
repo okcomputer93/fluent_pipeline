@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Simple
+module Fluent
   class Pipeline
     VERSION = '0.1.0'
   end

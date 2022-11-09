@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'simple/pipeline'
+require 'fluent/pipeline'
 
-module Simple
+module Fluent
   class PipeAdder
     def call(count)
       count + 1
@@ -10,7 +10,7 @@ module Simple
   end
 end
 
-module Simple
+module Fluent
   class CustomPipeAdder
     def handle(count)
       count + 1
@@ -18,39 +18,39 @@ module Simple
   end
 end
 
-RSpec.describe Simple::Pipeline do
+RSpec.describe Fluent::Pipeline do
   it 'should process an item through a pipe' do
-    Simple::Pipeline.
+    Fluent::Pipeline.
       dispatch(0).
-      through(Simple::PipeAdder.new).
+      through(Fluent::PipeAdder.new).
       then(->(new_count) { expect(new_count).to eq(1) })
   end
 
   it 'should process an item through multiple pipes' do
-    Simple::Pipeline.
+    Fluent::Pipeline.
       dispatch(0).
-      through([Simple::PipeAdder.new, Simple::PipeAdder.new]).
+      through([Fluent::PipeAdder.new, Fluent::PipeAdder.new]).
       then(->(new_count) { expect(new_count).to eq(2) })
   end
 
   it 'should process an item through a lambda as a pipe' do
-    Simple::Pipeline.
+    Fluent::Pipeline.
       dispatch(0).
       through(->(count) { count + 1 }).
       then(->(new_count) { expect(new_count).to eq(1) })
   end
 
   it 'should process an item through lambdas' do
-    Simple::Pipeline.
+    Fluent::Pipeline.
       dispatch(0).
       through([->(count) { count + 1 }, ->(count) { count + 1 }]).
       then(->(new_count) { expect(new_count).to eq(2) })
   end
 
   it 'should process an item via another handler method' do
-    Simple::Pipeline.
+    Fluent::Pipeline.
       dispatch(0).
-      through([Simple::CustomPipeAdder.new, Simple::CustomPipeAdder.new]).
+      through([Fluent::CustomPipeAdder.new, Fluent::CustomPipeAdder.new]).
       via(:handle).
       then(->(new_count) { expect(new_count).to eq(2) })
   end

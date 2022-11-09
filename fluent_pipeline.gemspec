@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative 'lib/simple/pipeline/version'
+require_relative 'lib/fluent/pipeline/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'simple_pipeline'
-  spec.version = Simple::Pipeline::VERSION
+  spec.name = 'fluent_pipeline'
+  spec.version = Fluent::Pipeline::VERSION
   spec.authors = ['Omar Juárez']
   spec.email = ['okcomputer2393@gmail.com']
 
   spec.summary = 'Pipeline pattern in Ruby. Heavily inspired by Laravel.'
   spec.description = 'Implements a Pipeline that send content through Pipes '
-  spec.homepage = 'https://github.com/okcomputer93/simple_pipeline'
+  spec.homepage = 'https://github.com/okcomputer93/fluent_pipeline'
   spec.required_ruby_version = '>= 2.6.0'
 
   # Specify which files should be added to the gem when it is released.

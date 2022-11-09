@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'simple/pipeline/version'
+require 'fluent/pipeline/version'
 
-module Simple
+module Fluent
   class Pipeline
     def self.dispatch(passable)
       new(passable)

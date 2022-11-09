@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in simple_pipeline.gemspec
+# Specify your gem's dependencies in fluent-pipeline.gemspec
 gemspec
 
 gem 'rake', '~> 13.0'
