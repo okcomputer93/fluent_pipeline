@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 require 'fluent/pipeline/version'
+require 'fluent/pipeline/helpers'
+require 'fluent/pipeline/errors'
 
 module Fluent
   class Pipeline
+    include Fluent::Helpers
+
     def self.dispatch(passable)
       new(passable)
     end
 
     def through(pipes)
-      self.pipes = pipes
+      self.pipes.push(*pipes)
       self
     end
 
@@ -18,17 +22,21 @@ module Fluent
       self
     end
 
-    def then(callback)
+    def then(callback = nil)
       handle_pipes
+      return passable unless callback
+
       callback.call(passable)
     end
 
     private
 
-    attr_accessor :passable, :pipes, :pipe_method
+    attr_accessor :passable, :pipe_method
+    attr_reader :pipes
 
     def initialize(passable)
       @passable = passable
+      @pipes = []
     end
 
     def via_method
@@ -36,12 +44,10 @@ module Fluent
     end
 
     def handle_pipes
-      if pipes.is_a? Array
+      with_undefined_method_handle do
         pipes.each do |pipe|
           self.passable = pipe.send(via_method, passable)
         end
-      else
-        self.passable = pipes.call(passable)
       end
     end
   end

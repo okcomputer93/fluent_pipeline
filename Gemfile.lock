@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    fluent_pipeline (0.1.0)
-      rspec (~> 3.0)
+    fluent_pipeline (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -51,6 +50,7 @@ PLATFORMS
 DEPENDENCIES
   fluent_pipeline!
   rake (~> 13.0)
+  rspec (~> 3.0)
   rubocop (~> 1.21)
 
 BUNDLED WITH
